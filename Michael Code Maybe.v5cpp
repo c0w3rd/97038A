@@ -1,1 +1,118 @@
-{"mode":"Text","textContent":"#pragma region VEXcode Generated Robot Configuration\n// Make sure all required headers are included.\n#include <stdio.h>\n#include <stdlib.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n\n\n#include \"vex.h\"\n\nusing namespace vex;\n\n// Brain should be defined by default\nbrain Brain;\n\n\n// START V5 MACROS\n#define waitUntil(condition)                                                   \\\n  do {                                                                         \\\n    wait(5, msec);                                                             \\\n  } while (!(condition))\n\n#define repeat(iterations)                                                     \\\n  for (int iterator = 0; iterator < iterations; iterator++)\n// END V5 MACROS\n\n\n// Robot configuration code.\ncontroller Controller1 = controller(primary);\nmotor Motor1 = motor(PORT1, ratio18_1, false);\n\nmotor Motor2 = motor(PORT2, ratio18_1, false);\n\nmotor Motor3 = motor(PORT3, ratio18_1, false);\n\nmotor Motor4 = motor(PORT4, ratio18_1, false);\n\n\n\n\n// define variable for remote controller enable/disable\nbool RemoteControlCodeEnabled = true;\n#pragma endregion VEXcode Generated Robot Configuration\n\n/*----------------------------------------------------------------------------*/\n/*                                                                            */\n/*    Module:       main.cpp                                                  */\n/*    Author:       {author}                                                  */\n/*    Created:      {date}                                                    */\n/*    Description:  V5 project                                                */\n/*                                                                            */\n/*----------------------------------------------------------------------------*/\n\n// Include the V5 Library\n#include \"vex.h\"\n  \n// Allows for easier use of the VEX Library\nusing namespace vex;\n\nint main() {\n  Motor1.spin(forward);\n  Motor2.spin(forward);\n  Motor3.spin(forward);\n  Motor4.spin(forward);\n\n  //Variable declaration\n  float C1P; //Controller 1 Axis 1\n  float C3P; //Controller 1 Axis 2\n  \n  float M1T; //Motor 1 Temperature (percentage)\n  float M2T; //Motor 2 Temperature (percentage)\n  float M3T; //Motor 3 Temperature (percentage)\n  float M4T; //Motor 4 Temperature (percentage)\n\n  void newline() {\n    Brain.Screen.newLine();\n  }\n\n  void variables() {\n    //Controller axis\n    C1P = Controller1.Axis1.position();\n    C3P = Controller1.Axis3.position();\n\n    //Motor temperatures\n    M1T = Motor1.temperature(percent);\n    M2T = Motor2.temperature(percent);\n    M3T = Motor3.temperature(percent);\n    M4T = Motor4.temperature(percent);\n  }\n\n  void logging(x, y, z, a) {\n    Brain.Screen.clearScreen();\n    Brain.Screen.print(x);\n    newline();\n    Brain.Screen.print(y);\n    newline();\n    Brain.Screen.print(z);\n    newline();\n    Brain.Screen.print(a);\n    newline();\n    wait(1, seconds);\n  }\n\n  while(true) {\n    variables();\n\n    //side 1\n    Motor1.setVelocity((C3P + C1P)/2);\n    Motor3.setVelocity((C3P + C1P)/2);\n\n    //side 2\n    Motor2.setVelocity(C3P - C1P)/2);\n    Motor4.setVelocity(C3P - C1P)/2);\n    wait(10, msec);\n    thread Thread2 = thread(logging(M1T, M2T, M3T, M4T));\n  }\n}\n","textLanguage":"cpp","rconfig":[{"port":[],"name":"Controller1","customName":false,"deviceType":"Controller","deviceClass":"controller","setting":{"left":"","leftDir":"false","right":"","rightDir":"false","upDown":"","upDownDir":"false","xB":"","xBDir":"false","drive":"none","id":"primary"}},{"port":[1],"name":"Motor1","customName":false,"deviceType":"Motor","deviceClass":"motor","setting":{"reversed":"false","fwd":"forward","rev":"reverse","gear":"ratio18_1","id":"partner"}},{"port":[2],"name":"Motor2","customName":false,"deviceType":"Motor","deviceClass":"motor","setting":{"reversed":"false","fwd":"forward","rev":"reverse","gear":"ratio18_1","id":"partner"}},{"port":[3],"name":"Motor3","customName":false,"deviceType":"Motor","deviceClass":"motor","setting":{"reversed":"false","fwd":"forward","rev":"reverse","gear":"ratio18_1","id":"partner"}},{"port":[4],"name":"Motor4","customName":false,"deviceType":"Motor","deviceClass":"motor","setting":{"reversed":"false","fwd":"forward","rev":"reverse","gear":"ratio18_1","id":"partner"}}],"slot":0,"platform":"V5","sdkVersion":"20220726.10.00.00","appVersion":"2.4.0","minVersion":"2.4.0","fileFormat":"1.2.0","icon":"","targetBrainGen":"First","target":"Physical"}
+#pragma region VEXcode Generated Robot Configuration
+// Make sure all required headers are included.
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#include <string.h>
+
+
+#include "vex.h"
+
+using namespace vex;
+
+// Brain should be defined by default
+brain Brain;
+
+
+// START V5 MACROS
+#define waitUntil(condition)                                                   \
+  do {                                                                         \
+    wait(5, msec);                                                             \
+  } while (!(condition))
+
+#define repeat(iterations)                                                     \
+  for (int iterator = 0; iterator < iterations; iterator++)
+// END V5 MACROS
+
+
+// Robot configuration code.
+controller Controller1 = controller(primary);
+motor Motor1 = motor(PORT1, ratio18_1, false);
+
+motor Motor2 = motor(PORT2, ratio18_1, false);
+
+motor Motor3 = motor(PORT3, ratio18_1, false);
+
+motor Motor4 = motor(PORT4, ratio18_1, false);
+
+
+
+
+// define variable for remote controller enable/disable
+bool RemoteControlCodeEnabled = true;
+#pragma endregion VEXcode Generated Robot Configuration
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       {author}                                                  */
+/*    Created:      {date}                                                    */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+// Include the V5 Library
+#include "vex.h"
+  
+// Allows for easier use of the VEX Library
+using namespace vex;
+
+int main() {
+  Motor1.spin(forward);
+  Motor2.spin(forward);
+  Motor3.spin(forward);
+  Motor4.spin(forward);
+
+  //Variable declaration
+  float C1P; //Controller 1 Axis 1
+  float C3P; //Controller 1 Axis 2
+  
+  float M1T; //Motor 1 Temperature (percentage)
+  float M2T; //Motor 2 Temperature (percentage)
+  float M3T; //Motor 3 Temperature (percentage)
+  float M4T; //Motor 4 Temperature (percentage)
+
+  void newline() {
+    Brain.Screen.newLine();
+  }
+
+  void variables() {
+    //Controller axis
+    C1P = Controller1.Axis1.position();
+    C3P = Controller1.Axis3.position();
+
+    //Motor temperatures
+    M1T = Motor1.temperature(percent);
+    M2T = Motor2.temperature(percent);
+    M3T = Motor3.temperature(percent);
+    M4T = Motor4.temperature(percent);
+  }
+
+  void logging(x, y, z, a) {
+    Brain.Screen.clearScreen();
+    Brain.Screen.print(x);
+    newline();
+    Brain.Screen.print(y);
+    newline();
+    Brain.Screen.print(z);
+    newline();
+    Brain.Screen.print(a);
+    newline();
+    wait(1, seconds);
+  }
+
+  while(true) {
+    variables();
+
+    //side 1
+    Motor1.setVelocity((C3P + C1P)/2);
+    Motor3.setVelocity((C3P + C1P)/2);
+
+    //side 2
+    Motor2.setVelocity(C3P - C1P)/2);
+    Motor4.setVelocity(C3P - C1P)/2);
+    wait(10, msec);
+    thread Thread2 = thread(logging(M1T, M2T, M3T, M4T));
+  }
+}
